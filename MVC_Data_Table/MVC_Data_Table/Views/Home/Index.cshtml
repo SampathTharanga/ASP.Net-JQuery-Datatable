@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Implement JQuery Datatable in ASP.Net MVC5</h2>
+
+<div style="width:90%; margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Contact No</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+@*Load data table css*@
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+@*Load data table js*@
+@section scripts{
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#myTable").DataTable({
+                "ajax": {
+                    "url": "/Home/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "CompanyName", "autoWidth": true },
+                    { "data": "ContactNo", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+    }
