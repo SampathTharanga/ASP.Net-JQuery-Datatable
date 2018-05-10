@@ -42,7 +42,7 @@ namespace Data_Sorting.Controllers
             {
                 var v = (from a in dc.tblCustomers select a);
                 //Sorting
-                if(!string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir))
+                if(!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
                 {
                     v = v.OrderBy(sortColumn + " " + sortColumnDir);
                 }
@@ -51,14 +51,6 @@ namespace Data_Sorting.Controllers
                 var data = v.Skip(skip).Take(pageSize).ToList();
                 return Json(new { draw = draw, recordFiltered = totalRecords, recordsTotal = totalRecords, data = data }, JsonRequestBehavior.AllowGet);
             }
-            
-            /*
-            using (CustomerDatabaseEntities dc = new CustomerDatabaseEntities())
-            {
-                var data = (from a in dc.tblCustomers select a);
-                return Json(new { data = data }, JsonRequestBehavior.AllowGet);
-            }
-            */
         }
     }
 }
