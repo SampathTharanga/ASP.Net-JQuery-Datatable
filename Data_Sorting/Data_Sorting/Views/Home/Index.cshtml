@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>JQuery DataTable server side pagination and sorting in ASP.Net MVC 5</h2>
+
+<div style="width:90%; margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th></th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>CompanyName</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@*load here data table css*@
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts{
+    @*Load here data table js*@
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": false,    // this is for disable filter (search box)
+                "orderMulti": false,// for disable multipple column at once
+                "ajax": {
+                    "url": "/Home/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "FirstName", "name": "FirstName", "autoWidth": true },
+                    { "data": "LastName", "name": "LastName", "autoWidth": true },
+                    { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
+                    { "data": "Address", "name": "Address", "autoWidth": true },
+                    { "data": "City", "name": "City", "autoWidth": true },
+                    { "data": "Country", "name": "Country", "autoWidth": true },
+                    { "data": "State", "name": "State", "autoWidth": true },
+                    { "data": "Zip", "name": "Zip", "autoWidth": true },
+                    { "data": "Phone", "name": "Phone", "autoWidth": true }
+                ]
+            });
+        });
+    </script>
+
+    }
